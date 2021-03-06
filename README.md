@@ -11,7 +11,6 @@
 # 技术
 
 - SpringBoot
-- SpringSecurity
 - Swagger
 - MyBatisPlus
 - Mysql
