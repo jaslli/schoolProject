@@ -10,10 +10,10 @@ spring:
 aliyun:
   oss:
     file:
-      endpoint: oss-cn-hangzhou.aliyuncs.com
-      keyid: LTAI4G34bJAoc1TDdU5m5Vn5
-      keysecret: P8MPaR82Un0KIXIguq8oMBpmOFdZTf
-      bucketname: my-project-00
+      endpoint:
+      keyid:
+      keysecret:
+      bucketname:
 
 
 # 服务端口

@@ -18,8 +18,8 @@ spring:
 aliyun:
   vod:
     file:
-      keyid: LTAI4G34bJAoc1TDdU5m5Vn5
-      keysecret: P8MPaR82Un0KIXIguq8oMBpmOFdZTf
+      keyid:
+      keysecret:
 # 服务端口
 server:
   port: 8083
