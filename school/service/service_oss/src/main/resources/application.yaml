@@ -1,0 +1,21 @@
+spring:
+  # 服务名
+  application:
+    name: service-oss
+  # 环境设置
+  profiles:
+    active: dev
+
+# 阿里云OSS的设置
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-hangzhou.aliyuncs.com
+      keyid: LTAI4G34bJAoc1TDdU5m5Vn5
+      keysecret: P8MPaR82Un0KIXIguq8oMBpmOFdZTf
+      bucketname: my-project-00
+
+
+# 服务端口
+server:
+  port: 8082

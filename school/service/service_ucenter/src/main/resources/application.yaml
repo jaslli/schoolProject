@@ -1,0 +1,35 @@
+# 启动端口
+server:
+  port: 8086
+spring:
+  # 服务名
+  application:
+    name: service-ucenter
+  # 数据库的配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/school?serverTimezone=GMT%2B8&userUnicode=true&characterEncoding=utf-8
+    username: root
+    password: password
+  # Redis的配置
+  redis:
+    lettuce:
+      pool:
+        min-idle: 0
+        max-active: 20
+        max-wait: -1
+        max-idle: 5
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 1800000
+  # 返回JSON的全局时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis-plus:
+  # mybatis日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:com/yww/educenter/mapper/xml/*.xml

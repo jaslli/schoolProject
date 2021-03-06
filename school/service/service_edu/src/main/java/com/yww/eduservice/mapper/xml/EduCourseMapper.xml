@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yww.eduservice.mapper.EduCourseMapper">
+
+
+    <!-- 根据课程ID查询课程的确认信息 -->
+    <select id="getPublishCourseInfo" resultType="com.yww.eduservice.entity.vo.CoursePublishVo">
+        SELECT
+            c.id,
+            c.title,
+            c.cover,
+            c.lesson_num AS lessonNum,
+            CONVERT(c.price, DECIMAL(8,2)) AS price,
+            s1.title AS subjectLevelOne,
+            s2.title AS subjectLevelTwo,
+            t.name AS teacherName
+        FROM
+            edu_course c
+                LEFT JOIN edu_teacher t ON c.teacher_id = t.id
+                LEFT JOIN edu_subject s1 ON c.subject_parent_id = s1.id
+                LEFT JOIN edu_subject s2 ON c.subject_id = s2.id
+        WHERE
+            c.id = #{id}
+    </select>
+
+    <!-- 根据课程ID查询课程详情页的基本信息 -->
+    <select id="getBaseCourseInfo" resultType="com.yww.eduservice.entity.vo.front.CourseWebVo">
+        SELECT
+            ec.id,ec.title,ec.cover,ec.lesson_num AS lessonNum,ec.buy_count AS buyCount,ec.view_count AS viewCount,
+            ecd.description,
+            et.id AS teacherId,et.name AS teacherName,et.intro,et.avatar,
+            CONVERT(ec.price, DECIMAL(8,2)) AS price,
+            s1.id AS subjectLevelOneId,s1.title AS subjectLevelOne,
+            s2.id AS subjectLevelTwoId,s2.title AS subjectLevelTwo
+        FROM
+            edu_course ec
+                LEFT JOIN edu_course_description ecd ON ec.id = ecd.id
+                LEFT JOIN edu_teacher et ON ec.teacher_id = et.id
+                LEFT JOIN edu_subject s1 ON ec.subject_parent_id = s1.id
+                LEFT JOIN edu_subject s2 ON ec.subject_id = s2.id
+        WHERE
+            ec.id = #{id}
+    </select>
+
+</mapper>

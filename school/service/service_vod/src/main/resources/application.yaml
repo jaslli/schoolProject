@@ -1,0 +1,26 @@
+spring:
+  # 服务名
+  application:
+    name: service-vod
+  # 环境设置
+  profiles:
+    active: dev
+  # 上传文件配置
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  # Nacos配置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+aliyun:
+  vod:
+    file:
+      keyid: LTAI4G34bJAoc1TDdU5m5Vn5
+      keysecret: P8MPaR82Un0KIXIguq8oMBpmOFdZTf
+# 服务端口
+server:
+  port: 8083
+
