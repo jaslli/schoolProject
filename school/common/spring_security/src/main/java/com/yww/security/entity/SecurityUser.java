@@ -32,8 +32,7 @@ public class SecurityUser implements UserDetails {
      */
     private List<String> permissionValueList;
 
-    public SecurityUser() {
-    }
+    public SecurityUser() { }
 
     public SecurityUser(User user) {
         if (user != null) {
@@ -41,6 +40,9 @@ public class SecurityUser implements UserDetails {
         }
     }
 
+    /**
+     * 获取用户权限
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
@@ -55,31 +57,53 @@ public class SecurityUser implements UserDetails {
         return authorities;
     }
 
+    /**
+     * 获取用户密码
+     */
     @Override
     public String getPassword() {
         return currentUserInfo.getPassword();
     }
 
+    /**
+     * 获取用户名
+     */
     @Override
     public String getUsername() {
         return currentUserInfo.getUsername();
     }
 
+    /**
+     * 判断用户登陆是否过期
+     * @return true表示过期
+     */
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    /**
+     * 判断用户是否被锁定
+     * @return true表示锁定
+     */
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    /**
+     * 判断用户凭证是否
+     * @return true表示未过期
+     */
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    /**
+     *  判断用户是否可用
+     * @return true表示可用
+     */
     @Override
     public boolean isEnabled() {
         return true;

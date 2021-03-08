@@ -26,4 +26,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public com.yww.aclservice.entity.User selectByUserName(String username) {
         return baseMapper.selectOne(new QueryWrapper<User>().eq("username",username));
     }
+
 }

@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.yww.aclservice.entity.User;
 
 
+/**
+ * @author yww
+ */
 public interface UserService extends IService<User> {
     /**
      * 根据用户名获取用户信息

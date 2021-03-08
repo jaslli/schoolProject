@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @ClassName DefaultPasswordEncoder
- * @Descriprtion 密码的处理方法类型
+ * @Descriprtion 密码的处理方法
  * @Author yww
  * @Date 2021/2/25 10:57
  * @Version 1.0
@@ -18,18 +18,12 @@ public class DefaultPasswordEncoder implements PasswordEncoder {
         this(-1);
     }
 
-    /**
-     * @param strength
-     *            the log rounds to use, between 4 and 31
-     */
     public DefaultPasswordEncoder(int strength) {
 
     }
 
     /**
      * 将未加密的密码进行MD5加密
-     * @param rawPassword
-     * @return
      */
     @Override
     public String encode(CharSequence rawPassword) {
@@ -37,7 +31,7 @@ public class DefaultPasswordEncoder implements PasswordEncoder {
     }
 
     /**
-     * 把数据库中的密码与经过MD5加密的密码进行比较
+     * 将数据库中的密码与经过MD5加密的密码进行比较
      */
     @Override
     public boolean matches(CharSequence rawPassword, String encodedPassword) {

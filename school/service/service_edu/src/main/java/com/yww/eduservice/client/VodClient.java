@@ -28,7 +28,7 @@ public interface VodClient {
      * @return Result
      */
     @DeleteMapping("eduvod/video/deleteVideos")
-    public Result deleteVideos(@RequestParam("videoIdList") List<String> videoIdList);
+    Result deleteVideos(@RequestParam("videoIdList") List<String> videoIdList);
 
 }
 

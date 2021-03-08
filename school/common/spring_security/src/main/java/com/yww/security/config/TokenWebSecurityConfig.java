@@ -36,7 +36,7 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public TokenWebSecurityConfig(UserDetailsService userDetailsService, DefaultPasswordEncoder defaultPasswordEncoder,
-                                  TokenManager tokenManager, RedisTemplate redisTemplate) {
+                                  TokenManager tokenManager, RedisTemplate<String,Object> redisTemplate) {
         this.userDetailsService = userDetailsService;
         this.defaultPasswordEncoder = defaultPasswordEncoder;
         this.tokenManager = tokenManager;
@@ -44,7 +44,7 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 配置设置
+     * 核心配置
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -72,8 +72,9 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/api/**",
-                "/swagger-resources/**", "/webjars/**", "/v2/**", "/doc.html/**"
+        web.ignoring().antMatchers(
+                "/api/**",
+                "/doc.html/**"
         );
     }
 }
