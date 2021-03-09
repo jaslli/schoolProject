@@ -19,20 +19,32 @@ import javax.servlet.http.HttpServletResponse;
  **/
 public class TokenLogoutHandler implements LogoutHandler {
     private final TokenManager tokenManager;
-    private final RedisTemplate redisTemplate;
+    private final RedisTemplate<String,Object> redisTemplate;
 
-    public TokenLogoutHandler(TokenManager tokenManager, RedisTemplate redisTemplate) {
+    /**
+     * 全参数构造器
+     * @param tokenManager TokenManager管理类
+     * @param redisTemplate RedisTemplate模板
+     */
+    public TokenLogoutHandler(TokenManager tokenManager, RedisTemplate<String,Object> redisTemplate) {
         this.tokenManager = tokenManager;
         this.redisTemplate = redisTemplate;
     }
 
+    /**
+     * 登出
+     * @param request 请求
+     * @param response  响应
+     * @param authentication 权限
+     */
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        // 从请求头部获取Token
         String token = request.getHeader("token");
         if (token != null) {
+            // 删除Token
             tokenManager.removeToken(token);
-
-            //清空当前用户缓存中的权限数据
+            // 删除Redis缓存中对该用户名的缓存信息
             String userName = tokenManager.getUserFromToken(token);
             redisTemplate.delete(userName);
         }

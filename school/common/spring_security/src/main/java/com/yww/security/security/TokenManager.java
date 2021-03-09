@@ -16,20 +16,39 @@ import java.util.Date;
  **/
 @Component
 public class TokenManager {
-
-    private final long tokenExpiration = 24*60*60*1000;
+    /**
+     * Token的编码密钥
+     */
     private final String tokenSignKey = "123456";
 
+    /**
+     * 使用JWT工具类根据用户名生成Token
+     * @param username 用户名
+     * @return Token
+     */
     public String createToken(String username) {
+        // Token的有效时长
+        long tokenExpiration = 24 * 60 * 60 * 1000;
         return Jwts.builder().setSubject(username)
+                // 设置有效时间
                 .setExpiration(new Date(System.currentTimeMillis() + tokenExpiration))
+                // 加密
                 .signWith(SignatureAlgorithm.HS512, tokenSignKey).compressWith(CompressionCodecs.GZIP).compact();
     }
 
+    /**
+     * 根据Token中获取用户信息
+     * @param token Token
+     * @return 用户信息（Subject）
+     */
     public String getUserFromToken(String token) {
         return Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(token).getBody().getSubject();
     }
 
+    /**
+     * 删除Token
+     * @param token Token
+     */
     public void removeToken(String token) {}
 
 

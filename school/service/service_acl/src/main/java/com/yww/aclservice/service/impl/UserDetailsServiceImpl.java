@@ -47,9 +47,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         // 返回UserDetails实现类
         com.yww.security.entity.User curUser = new com.yww.security.entity.User();
         BeanUtils.copyProperties(user,curUser);
-
+        // 根据用户信息查询用户权限列表
         List<String> authorities = permissionService.selectPermissionValueByUserId(user.getId());
-        SecurityUser securityUser = new SecurityUser(curUser);
+        SecurityUser securityUser = new SecurityUser();
+        securityUser.setCurrentUserInfo(curUser);
         securityUser.setPermissionValueList(authorities);
         return securityUser;
     }

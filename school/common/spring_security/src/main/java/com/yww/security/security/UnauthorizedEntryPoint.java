@@ -17,11 +17,12 @@ import javax.servlet.http.HttpServletResponse;
  * @Version 1.0
  **/
 public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
-
+    /**
+     *  未授权的统一处理
+     */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) {
-
         ResponseUtil.out(response, Result.error());
     }
 }

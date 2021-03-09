@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,7 +22,7 @@ import java.util.List;
 
 /**
  * @ClassName TokenAuthenticationFilter
- * @Descriprtion 授权过滤
+ * @Descriprtion 授权过滤器
  * @Author yww
  * @Date 2021/2/25 10:56
  * @Version 1.0
@@ -31,14 +30,22 @@ import java.util.List;
 public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
 
     private final TokenManager tokenManager;
-    private final RedisTemplate redisTemplate;
+    private final RedisTemplate<String,Object> redisTemplate;
 
-    public TokenAuthenticationFilter(AuthenticationManager authManager, TokenManager tokenManager,RedisTemplate redisTemplate) {
+    /**
+     * 全参构造器
+     */
+    public TokenAuthenticationFilter(AuthenticationManager authManager,
+                                     TokenManager tokenManager,
+                                     RedisTemplate<String,Object> redisTemplate) {
         super(authManager);
         this.tokenManager = tokenManager;
         this.redisTemplate = redisTemplate;
     }
 
+    /**
+     * 授权过滤
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws IOException, ServletException {
@@ -47,7 +54,7 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
             chain.doFilter(req, res);
             return;
         }
-
+        // 获取当前认证成功的用户权限信息
         UsernamePasswordAuthenticationToken authentication = null;
         try {
             authentication = getAuthentication(req);
@@ -63,26 +70,28 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
         chain.doFilter(req, res);
     }
 
+    /**
+     * 获取权限列表
+     * @param request 请求
+     * @return 权限列表
+     */
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        // token置于header里
+        // 获取头部的token
         String token = request.getHeader("token");
         if (token != null && !"".equals(token.trim())) {
+            // 从Token中获取用户信息
             String userName = tokenManager.getUserFromToken(token);
-
+            // 从Redis中获取权限列表
             List<String> permissionValueList = (List<String>) redisTemplate.opsForValue().get(userName);
+            // 将权限列表转换成框架需要的集合列表
             Collection<GrantedAuthority> authorities = new ArrayList<>();
-            for(String permissionValue : permissionValueList) {
-                if (StringUtils.isEmpty(permissionValue)) {
-                    continue;
+            if (permissionValueList != null) {
+                for(String permissionValue : permissionValueList) {
+                    SimpleGrantedAuthority authority = new SimpleGrantedAuthority(permissionValue);
+                    authorities.add(authority);
                 }
-                SimpleGrantedAuthority authority = new SimpleGrantedAuthority(permissionValue);
-                authorities.add(authority);
             }
-
-            if (!StringUtils.isEmpty(userName)) {
-                return new UsernamePasswordAuthenticationToken(userName, token, authorities);
-            }
-            return null;
+            return new UsernamePasswordAuthenticationToken(userName, token, authorities);
         }
         return null;
     }

@@ -19,7 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * @ClassName TokenWebSecurityConfig
- * @Descriprtion Security的核心配置类
+ * @Descriprtion SpringSecurity的核心配置类
  * @Author yww
  * @Date 2021/2/25 10:53
  * @Version 1.0
@@ -34,9 +34,14 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final DefaultPasswordEncoder defaultPasswordEncoder;
     private final RedisTemplate<String,Object> redisTemplate;
 
+    /**
+     * 全参构造器
+     */
     @Autowired
-    public TokenWebSecurityConfig(UserDetailsService userDetailsService, DefaultPasswordEncoder defaultPasswordEncoder,
-                                  TokenManager tokenManager, RedisTemplate<String,Object> redisTemplate) {
+    public TokenWebSecurityConfig(UserDetailsService userDetailsService,
+                                  DefaultPasswordEncoder defaultPasswordEncoder,
+                                  TokenManager tokenManager,
+                                  RedisTemplate<String,Object> redisTemplate) {
         this.userDetailsService = userDetailsService;
         this.defaultPasswordEncoder = defaultPasswordEncoder;
         this.tokenManager = tokenManager;
@@ -53,9 +58,14 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable()
                 .authorizeRequests()
                 .anyRequest().authenticated()
+                .and().formLogin().loginProcessingUrl("/admin/acl/login")
+                // 退出路径
                 .and().logout().logoutUrl("/admin/acl/index/logout")
+                // 设置自定义的退出登陆
                 .addLogoutHandler(new TokenLogoutHandler(tokenManager,redisTemplate)).and()
+                // 传入自定义认证过滤器
                 .addFilter(new TokenLoginFilter(authenticationManager(), tokenManager, redisTemplate))
+                // 传入自定义授权过滤器
                 .addFilter(new TokenAuthenticationFilter(authenticationManager(), tokenManager, redisTemplate)).httpBasic();
     }
 
@@ -68,13 +78,16 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 配置哪些请求不拦截
+     * 配置不拦截的请求
      */
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(
                 "/api/**",
-                "/doc.html/**"
-        );
+                // swagger-bootstrap的权限
+                "/doc.html/**",
+                "/webjars/**",
+                "/swagger-resources",
+                "/v2/**");
     }
 }
