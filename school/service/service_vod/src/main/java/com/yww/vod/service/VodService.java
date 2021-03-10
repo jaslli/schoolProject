@@ -13,8 +13,17 @@ import java.util.List;
  **/
 public interface VodService {
 
+    /**
+     * 上传视频导阿里云
+     * @param file 视频文件
+     * @return 视频ID
+     */
     String uploadVideoAliyun(MultipartFile file);
 
+    /**
+     * 批量删除视频
+     * @param videoIdList 视频ID列表
+     */
     void removeMoreVideo(List<String> videoIdList);
 
 }

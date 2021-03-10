@@ -84,7 +84,7 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(
                 "/api/**",
-                // swagger-bootstrap的权限
+                // swagger的权限
                 "/doc.html/**",
                 "/webjars/**",
                 "/swagger-resources",

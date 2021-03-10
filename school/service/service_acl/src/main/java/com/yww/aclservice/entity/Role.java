@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * @ClassName Role
- * @Descriprtion 角色类
+ * @Descriprtion 角色实体类
  * @Author yww
  * @Date 2021/2/25 11:23
  * @Version 1.0
@@ -21,7 +21,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("acl_role")
-@ApiModel(value="Role对象", description="")
+@ApiModel(value="Role对象", description="角色")
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;

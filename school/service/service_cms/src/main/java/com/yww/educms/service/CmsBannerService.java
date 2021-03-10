@@ -6,14 +6,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
 /**
- * <p>
- * 首页banner表 服务类
- * </p>
- *
  * @author yww
- * @since 2021-02-10
  */
 public interface CmsBannerService extends IService<CmsBanner> {
 
+    /**
+     * 查询三张Banner
+     * @return Banner数据
+     */
     List<CmsBanner> selectBanner();
 }

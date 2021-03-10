@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * @ClassName User
- * @Descriprtion 用户类
+ * @Descriprtion 用户实体类
  * @Author yww
  * @Date 2021/2/25 11:25
  * @Version 1.0

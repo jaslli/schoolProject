@@ -17,12 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * <p>
- * 讲师 前端控制器
- * </p>
- *
  * @author yww
  * @since 2021-01-28
+ * TODO 将方法实现写入实现类里
  */
 @Api(tags = "讲师管理")
 @RestController

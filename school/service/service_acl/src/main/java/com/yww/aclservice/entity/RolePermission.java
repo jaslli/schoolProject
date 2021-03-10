@@ -21,7 +21,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("acl_role_permission")
-@ApiModel(value="RolePermission对象", description="角色权限")
+@ApiModel(value="RolePermission对象", description="角色与权限之间的关系类")
 public class RolePermission implements Serializable {
 
     private static final long serialVersionUID = 1L;

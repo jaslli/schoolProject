@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @ClassName AclApplication
- * @Descriprtion ACL服务的启动类
+ * @Descriprtion 权限服务的启动类
  * @Author yww
  * @Date 2021/2/25 11:20
  * @Version 1.0

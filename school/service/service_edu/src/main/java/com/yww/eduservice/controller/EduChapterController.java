@@ -14,10 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * <p>
- * 课程 前端控制器
- * </p>
- *
  * @author yww
  * @since 2021-02-03
  */

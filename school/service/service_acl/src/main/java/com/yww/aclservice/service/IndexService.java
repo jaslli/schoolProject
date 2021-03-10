@@ -5,6 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author yww
+ */
 public interface IndexService {
     /**
      * 根据用户名获取用户信息

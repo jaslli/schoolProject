@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 
+/**
+ * @Descriprtion 调用VOD服务
+ * @author yww
+ */
 @FeignClient(name = "service-vod", fallback = VodFileDegradeFeignClient.class)
 @Component
 public interface VodClient {

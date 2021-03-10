@@ -22,6 +22,11 @@ import java.util.UUID;
 @Service
 public class OssServiceImpl implements OssService {
 
+    /**
+     * 上传图片
+     * @param file 图片
+     * @return 图片引用地址
+     */
     @Override
     public String uploadFileAvatar(MultipartFile file) {
         String endpoint = ConstantPropertiesUtils.END_POINT;
@@ -49,8 +54,7 @@ public class OssServiceImpl implements OssService {
             //  上传文件
             ossClient.putObject(bucketName, fileName, inputStream);
             //  获取文件的公网访问路径
-            String url = "https://" + bucketName + "." + endpoint + "/" + fileName;
-            return url;
+            return "https://" + bucketName + "." + endpoint + "/" + fileName;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

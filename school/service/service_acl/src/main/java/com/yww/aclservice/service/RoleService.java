@@ -7,6 +7,9 @@ import com.yww.aclservice.entity.Role;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author yww
+ */
 public interface RoleService extends IService<Role> {
     /**
      * 根据用户ID获取角色信息

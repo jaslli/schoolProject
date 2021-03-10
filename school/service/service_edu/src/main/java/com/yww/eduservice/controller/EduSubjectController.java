@@ -13,10 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 /**
- * <p>
- * 课程科目 前端控制器
- * </p>
- *
  * @author yww
  * @since 2021-02-02
  */

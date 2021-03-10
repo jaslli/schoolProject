@@ -5,16 +5,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.yww.educenter.entity.vo.RegisterVo;
 
 /**
- * <p>
- * 会员表 服务类
- * </p>
- *
  * @author yww
- * @since 2021-02-18
  */
 public interface UcenterMemberService extends IService<UcenterMember> {
 
+    /**
+     * 登陆
+     */
     String login(UcenterMember member);
 
+    /**
+     * 注册
+     */
     void register(RegisterVo registerVo);
 }

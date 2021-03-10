@@ -12,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>
- * 课程视频 前端控制器
- * </p>
- *
  * @author yww
  * @since 2021-02-03
  */

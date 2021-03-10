@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * @ClassName AuthGlobalFilter
- * @Descriprtion 全局Filter，统一处理会员登录与外部不允许访问的服务
+ * @Descriprtion 全局Filter，统一处理用户登录与外部不允许访问的服务
  * @Author yww
  * @Date 2021/3/7 5:06
  * @Version 1.0
@@ -25,25 +25,17 @@ import java.util.List;
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
-    private AntPathMatcher antPathMatcher = new AntPathMatcher();
+    private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getURI().getPath();
-        //MindSchoool的api接口，校验用户必须登录
+        // 校验用户必须登录
         if(antPathMatcher.match("/api/**/auth/**", path)) {
             List<String> tokenList = request.getHeaders().get("token");
-            if(null == tokenList) {
-                ServerHttpResponse response = exchange.getResponse();
-                return out(response);
-            } else {
-//                Boolean isCheck = JwtUtils.checkToken(tokenList.get(0));
-//                if(!isCheck) {
-                ServerHttpResponse response = exchange.getResponse();
-                return out(response);
-//                }
-            }
+            ServerHttpResponse response = exchange.getResponse();
+            return out(response);
         }
         //内部服务接口，不允许外部访问
         if(antPathMatcher.match("/**/inner/**", path)) {

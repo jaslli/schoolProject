@@ -8,7 +8,7 @@ import java.util.Random;
 
 /**
  * @ClassName RandomUtil
- * @Descriprtion 生成随机数工具类
+ * @Descriprtion 生成随机数工具类，用于验证码的生成
  * @Author yww
  * @Date 2021/2/18 18:10
  * @Version 1.0
@@ -30,9 +30,6 @@ public class RandomUtil {
     }
     /**
      * 给定数组，抽取n个数据
-     * @param list 一个数组
-     * @param n 选择的个数
-     * @return
      */
     public static ArrayList getRandom(List list, int n) {
 

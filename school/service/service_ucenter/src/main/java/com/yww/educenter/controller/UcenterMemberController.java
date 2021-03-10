@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <p>
- * 会员表 前端控制器
- * </p>
- *
- * @author yww
- * @since 2021-02-18
- */
+ * @ClassName UcenterMemberController
+ * @Descriprtion 前台登陆控制器
+ * @Author yww
+ * @Date 2021/2/1 23:34
+ * @Version 1.0
+ **/
 @RestController
 @RequestMapping("/educenter/member")
 public class UcenterMemberController {

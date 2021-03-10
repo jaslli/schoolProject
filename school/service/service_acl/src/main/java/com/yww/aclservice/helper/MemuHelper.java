@@ -18,66 +18,65 @@ public class MemuHelper {
 
     /**
      * 构建菜单
-     * @param treeNodes
-     * @return
+     * TODO 可以优化成递归
      */
-    public static List<JSONObject> bulid(List<Permission> treeNodes) {
-        List<JSONObject> meuns = new ArrayList<>();
+    public static List<JSONObject> build(List<Permission> treeNodes) {
+        List<JSONObject> menus = new ArrayList<>();
         if(treeNodes.size() == 1) {
             Permission topNode = treeNodes.get(0);
             //左侧一级菜单
-            List<Permission> oneMeunList = topNode.getChildren();
-            for(Permission one :oneMeunList) {
-                JSONObject oneMeun = new JSONObject();
-                oneMeun.put("path", one.getPath());
-                oneMeun.put("component", one.getComponent());
-                oneMeun.put("redirect", "noredirect");
-                oneMeun.put("name", "name_"+one.getId());
-                oneMeun.put("hidden", false);
+            List<Permission> oneMenuList = topNode.getChildren();
+            for(Permission one :oneMenuList) {
+                JSONObject oneMenu = new JSONObject();
+                oneMenu.put("path", one.getPath());
+                oneMenu.put("component", one.getComponent());
+                oneMenu.put("redirect", "noredirect");
+                oneMenu.put("name", "name_"+one.getId());
+                oneMenu.put("hidden", false);
 
                 JSONObject oneMeta = new JSONObject();
                 oneMeta.put("title", one.getName());
                 oneMeta.put("icon", one.getIcon());
-                oneMeun.put("meta", oneMeta);
+                oneMenu.put("meta", oneMeta);
 
                 List<JSONObject> children = new ArrayList<>();
-                List<Permission> twoMeunList = one.getChildren();
-                for(Permission two :twoMeunList) {
-                    JSONObject twoMeun = new JSONObject();
-                    twoMeun.put("path", two.getPath());
-                    twoMeun.put("component", two.getComponent());
-                    twoMeun.put("name", "name_"+two.getId());
-                    twoMeun.put("hidden", false);
+                List<Permission> twoMenuList = one.getChildren();
+                for(Permission two :twoMenuList) {
+                    JSONObject twoMenu = new JSONObject();
+                    twoMenu.put("path", two.getPath());
+                    twoMenu.put("component", two.getComponent());
+                    twoMenu.put("name", "name_"+two.getId());
+                    twoMenu.put("hidden", false);
 
                     JSONObject twoMeta = new JSONObject();
                     twoMeta.put("title", two.getName());
-                    twoMeun.put("meta", twoMeta);
+                    twoMenu.put("meta", twoMeta);
 
-                    children.add(twoMeun);
+                    children.add(twoMenu);
 
-                    List<Permission> threeMeunList = two.getChildren();
-                    for(Permission three :threeMeunList) {
+                    List<Permission> threeMenuList = two.getChildren();
+                    for(Permission three :threeMenuList) {
                         if (StringUtils.isEmpty(three.getPath())) {
                             continue;
                         }
 
-                        JSONObject threeMeun = new JSONObject();
-                        threeMeun.put("path", three.getPath());
-                        threeMeun.put("component", three.getComponent());
-                        threeMeun.put("name", "name_"+three.getId());
-                        threeMeun.put("hidden", true);
+                        JSONObject threeMenu = new JSONObject();
+                        threeMenu.put("path", three.getPath());
+                        threeMenu.put("component", three.getComponent());
+                        threeMenu.put("name", "name_"+three.getId());
+                        threeMenu.put("hidden", true);
 
                         JSONObject threeMeta = new JSONObject();
                         threeMeta.put("title", three.getName());
-                        threeMeun.put("meta", threeMeta);
+                        threeMenu.put("meta", threeMeta);
 
-                        children.add(threeMeun);
+                        children.add(threeMenu);
                     }
                 }
-                oneMeun.put("children", children);
-                meuns.add(oneMeun);
+                oneMenu.put("children", children);
+                menus.add(oneMenu);
             }
         }
-        return meuns;
+        return menus;
     }
 }

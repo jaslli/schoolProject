@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @ClassName Permission
- * @Descriprtion 权限类
+ * @Descriprtion 权限实体类
  * @Author yww
  * @Date 2021/2/25 11:22
  * @Version 1.0

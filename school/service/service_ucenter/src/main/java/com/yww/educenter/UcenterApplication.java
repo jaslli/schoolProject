@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @ClassName UcenterApplication
- * @Descriprtion ucenter启动类
+ * @Descriprtion ucenter服务启动类
  * @Author yww
  * @Date 2021/2/18 20:12
  * @Version 1.0

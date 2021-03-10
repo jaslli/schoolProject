@@ -145,7 +145,12 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         rolePermissionService.saveBatch(rolePermissionList);
     }
 
-    //根据用户id获取用户菜单
+
+    /**
+     * 根据用户id获取用户菜单
+     * @param id 用户ID
+     * @return 用户菜单
+     */
     @Override
     public List<String> selectPermissionValueByUserId(String id) {
 
@@ -169,9 +174,8 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
             selectPermissionList = baseMapper.selectPermissionByUserId(userId);
         }
 
-        List<Permission> permissionList = PermissionHelper.bulid(selectPermissionList);
-        List<JSONObject> result = MemuHelper.bulid(permissionList);
-        return result;
+        List<Permission> permissionList = PermissionHelper.build(selectPermissionList);
+        return MemuHelper.build(permissionList);
     }
 
     /**

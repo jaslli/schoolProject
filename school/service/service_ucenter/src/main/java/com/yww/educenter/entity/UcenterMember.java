@@ -14,10 +14,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
- * 会员表
- * </p>
- *
  * @author yww
  * @since 2021-02-18
  */

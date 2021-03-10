@@ -36,7 +36,10 @@ public class VodServiceImpl implements VodService {
         // 上传文件的名称
         String fileName = file.getOriginalFilename();
         // 上传后的名称
-        String title = fileName.substring(0, fileName.lastIndexOf("."));
+        String title = null;
+        if (fileName != null) {
+            title = fileName.substring(0, fileName.lastIndexOf("."));
+        }
         // 上传文件流
         InputStream inputStream = null;
         try {
@@ -54,16 +57,12 @@ public class VodServiceImpl implements VodService {
         //请求视频点播服务的请求ID
         System.out.print("RequestId=" + response.getRequestId() + "\n");
 
-        if (response.isSuccess()) {
-            videoId = response.getVideoId();
-        } else { //如果设置回调URL无效，不影响视频上传，可以返回VideoId同时会返回错误码。其他情况上传失败时，VideoId为空，此时需要根据返回错误码分析具体错误原因
-            videoId = response.getVideoId();
-        }
+        videoId = response.getVideoId();
         return videoId;
     }
 
     /**
-     * @Descriprtion 批量删除视频id
+     * @Descriprtion 批量删除视频
      */
     @Override
     public void removeMoreVideo(List<String> videoIdList) {

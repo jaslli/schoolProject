@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Configuration;
 @MapperScan("com.yww.eduservice.mapper")
 public class Educonfig {
 
-    // 分页插件
+    /**
+     * 分页插件
+     */
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();

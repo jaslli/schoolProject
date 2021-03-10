@@ -17,9 +17,7 @@ import com.yww.servicebase.handler.exceptionHandler.NullDataException;
  **/
 public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
     /**
-     * @Descriprtion 读取Excel中的内容
-     * @param subjectData
-     * @param analysisContext
+     * 读取Excel中的内容
      */
     @Override
     public void invoke(SubjectData subjectData, AnalysisContext analysisContext) {
@@ -49,15 +47,10 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
     }
 
     @Override
-    public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-
-    }
+    public void doAfterAllAnalysed(AnalysisContext analysisContext) { }
 
     /**
-     * @Descriprtion 查询该一级分类是否存在
-     * @param eduSubjectService
-     * @param name
-     * @return EduSubject
+     * 查询该一级分类是否存在
      */
     private EduSubject existOneSubject(EduSubjectService eduSubjectService,String name) {
         QueryWrapper<EduSubject> wrapper = new QueryWrapper<>();
@@ -68,11 +61,7 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
     }
 
     /**
-     * @Descriprtion 查询该二级分类是否存在在该一级分类
-     * @param eduSubjectService
-     * @param name
-     * @param pid
-     * @return EduSubject
+     *  查询该二级分类是否存在在该一级分类
      */
     private EduSubject existTwoSubject(EduSubjectService eduSubjectService,String name,String pid) {
         QueryWrapper<EduSubject> wrapper = new QueryWrapper<>();

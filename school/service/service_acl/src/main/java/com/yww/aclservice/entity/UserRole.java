@@ -21,7 +21,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("acl_user_role")
-@ApiModel(value="UserRole对象", description="")
+@ApiModel(value="UserRole对象", description="用户与角色之间的关系类")
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;

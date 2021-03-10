@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @ClassName PermissionHelper
- * @Descriprtion 根据权限数据构建菜单数据
+ * @Descriprtion 根据权限构建菜单数据
  * @Author yww
  * @Date 2021/3/7 1:32
  * @Version 1.0
@@ -15,10 +15,8 @@ import java.util.List;
 public class PermissionHelper {
     /**
      * 使用递归方法建菜单
-     * @param treeNodes
-     * @return
      */
-    public static List<Permission> bulid(List<Permission> treeNodes) {
+    public static List<Permission> build(List<Permission> treeNodes) {
         List<Permission> trees = new ArrayList<>();
         for (Permission treeNode : treeNodes) {
             if ("0".equals(treeNode.getPid())) {
@@ -31,8 +29,6 @@ public class PermissionHelper {
 
     /**
      * 递归查找子节点
-     * @param treeNodes
-     * @return
      */
     public static Permission findChildren(Permission treeNode,List<Permission> treeNodes) {
         treeNode.setChildren(new ArrayList<Permission>());

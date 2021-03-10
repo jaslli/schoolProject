@@ -23,7 +23,7 @@ public class CmsBannerServiceImpl extends ServiceImpl<CmsBannerMapper, CmsBanner
 
     /**
      * @Descriprtion 根据SORT查询三条Banner
-     * @return
+     * @return Banners数据
      */
     @Override
     @Cacheable(key="'selectIndexList'",value="banner")
@@ -33,7 +33,6 @@ public class CmsBannerServiceImpl extends ServiceImpl<CmsBannerMapper, CmsBanner
         wrapper.orderByAsc("sort");
         wrapper.last("limit 3");
 
-        List<CmsBanner> list = baseMapper.selectList(wrapper);
-        return list;
+        return baseMapper.selectList(wrapper);
     }
 }
